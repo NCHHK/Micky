@@ -1,0 +1,127 @@
+<html>
+  <body style="background-color: lightblue;">
+    <h1><strong>Get the Delicious Roasted Chicken Right At Your Door</strong></h1>
+    <div style="position: relative; max-width: 100%; height:400px;">
+      <img class="mySlides" src="C:\Note\Database\download (1).jpg" style="width:100%; height:400px;">
+      <img class="mySlides" src="C:\Note\Database\download.jpg" style="width:100%; height:400px;">
+      <img class="mySlides" src="C:\Note\Database\images.jpg" style="width:100%; height:400px;">
+     <div onclick="plusDivs(-1)" 
+           style="position: absolute; top:50%; left:10px; transform:translateY(-50%);
+                  padding:10px; background-color:rgba(0,0,0,0.5); color:#fff; cursor:pointer; z-index:100;">
+        &#10094;
+      </div>
+      <!-- Right arrow with a z-index to ensure it appears on top -->
+      <div onclick="plusDivs(1)" 
+           style="position: absolute; top:50%; right:10px; transform:translateY(-50%);
+                  padding:10px; background-color:rgba(0,0,0,0.5); color:#fff; cursor:pointer; z-index:100;">
+        &#10095;
+    </div>
+<table border="0" cellspacing="50" cellpadding="10">
+  <tr>
+        <td>
+<img src="C:\Users\ABun\Downloads\Money_Quest.jpg" width="320" height="240" alt="Photo">
+        </td>
+        <td>
+            <video width="320" height="240" controls>
+            <source src="C:\Users\ABun\Downloads\mickeyMouse.mp4" type="video/mp4">
+           </video>
+        </td>
+      </tr>
+    </table>
+    <div>
+      <label for="name">Enter your name:</label>
+      <input type="text" id="name" name="name">
+    </div>
+    <div>
+      <p>Select your favourite type:</p>
+      <input type="radio" id="fried" name="type" value="Halal">
+      <label for="fried">Halal</label><br>
+      <input type="radio" id="spicy" name="type" value="Spicy">
+      <label for="spicy">Spicy</label><br>
+      <input type="radio" id="sides" name="type" value="With Salad">
+      <label for="sides">With Salad</label>
+    </div>
+    <div>
+      <p>Extras to add (optional):</p>
+      <input type="checkbox" id="whole" name="extras" value="Whole">
+      <label for="whole">Whole</label><br>
+      <input type="checkbox" id="half" name="extras" value="Half">
+      <label for="half">Half</label><br>
+      <input type="checkbox" id="quarter" name="extras" value="Quarter">
+      <label for="quarter">Quarter</label>
+    </div>
+    <div>
+      <label for="deliveryTime">Choose delivery time:</label>
+      <select id="deliveryTime" name="deliveryTime">
+        <option value="Same day">Same day (after 3 hours of the order)</option>
+        <option value="Next day">Next day afternoon</option>
+        <option value="Next week">Same day next week</option>
+      </select>
+    </div>
+    <br>
+    <div>
+      <button onclick="submitOrder()">Submit</button>
+    </div>
+    <br>
+    <script>
+      function submitOrder() {
+        // Get the basic order details
+        const name = document.getElementById("name").value;
+        const type = document.querySelector('input[name="type"]:checked')?.value || "None";
+        const extrasElements = Array.from(document.querySelectorAll('input[name="extras"]:checked'));
+        const extras = extrasElements.map(cb => cb.value).join(", ") || "None";
+        const time = document.getElementById("deliveryTime").value;
+    
+        // Define price mappings for types and extras
+        const typePrices = {
+          "Halal": 40,
+          "Spicy": 30,
+          "With Salad": 35
+        };
+        const extrasPrices = {
+          "Whole": 40,
+          "Half": 20,
+          "Quarter": 10
+        };
+    
+        // Calculate the total
+        let total = 0;
+        if (type in typePrices) {
+          total += typePrices[type];
+        }
+    
+        extrasElements.forEach(function(extra) {
+          if (extra.value in extrasPrices) {
+            total += extrasPrices[extra.value];
+          }
+        });
+    
+        // Show an alert with the total
+        alert(`Order Summary:
+Name: ${name}
+Type: ${type} ($${typePrices[type] || 0})
+Extras: ${extras}
+Delivery Time: ${time}
+Total: $${total}`);
+      }
+      
+      var slideIndex = 1;
+      showDivs(slideIndex);
+      
+      function plusDivs(n) {
+        showDivs(slideIndex += n);
+      }
+      
+      function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length; }
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        x[slideIndex - 1].style.display = "block";
+      }
+    </script>
+  </body>
+</html>
